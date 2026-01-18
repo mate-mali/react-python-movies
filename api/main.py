@@ -49,7 +49,7 @@ def add_movie(movie: Movie):
     db.commit()
     return {
         "message": f"Movie with id = {cursor.lastrowid} added successfully",
-        "id": {cursor.lastrowid}
+        "id": cursor.lastrowid
         # return data of the exact inserted record for this specific action which is nice and accurate
         }
     # movie = models.Movie.create(**movie.dict())
