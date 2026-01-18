@@ -26,7 +26,8 @@ function App() {
     async function handleAddMovie(movie) {
         movie.actors = ''; /*placeholder entry to mitigate misalignment between accepting enpoint and sending frontend*/ 
         
-        /** await fetch assumes we dont know execution time fro http request and when the response is back some time then the jaascript should come back here and continue  */
+        /** await fetch assum es we dont know execution time fro http request and when the response is back some time then the jaascript should come back here and continue  */
+        
         const response = await fetch('/movies', {
             method: 'POST',
             body: JSON.stringify(movie),
