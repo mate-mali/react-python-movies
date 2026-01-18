@@ -46,7 +46,7 @@ function App() {
     });
         if (response.ok) {
             const movieWithId = await response.json();
-            movie.id = movieWithId; 
+            movie.id = movieWithId.id; 
             setMovies([...movies, movie]);
             setAddingMovie(false);
         } 
