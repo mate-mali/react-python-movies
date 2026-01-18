@@ -23,6 +23,17 @@ function App() {
 
 }, []);
 
+    async function handleDeleteMovie(movie) {
+        const response = await fetch(`/movies/${movie.id}`, {
+            method: 'DELETE',
+    });
+    if (response.ok) {
+        const nextMovies = movies.filter(m => m !== movie);
+        setMovies(nextMovies);
+    }
+
+}
+
     async function handleAddMovie(movie) {
         movie.actors = ''; /*placeholder entry to mitigate misalignment between accepting enpoint and sending frontend*/ 
         
@@ -34,9 +45,12 @@ function App() {
             headers: { 'Content-Type': 'application/json' }
     });
         if (response.ok) {
+            const movieWithId = await response.json();
+            movie.id = movieWithId; 
             setMovies([...movies, movie]);
             setAddingMovie(false);
-        }
+        } 
+        /* for iD retrieveal or add dependency to useEffect like the list at the end  */
     }
 
 
@@ -46,7 +60,7 @@ function App() {
             {movies.length === 0
                 ? <p>No movies yet. Maybe add something?</p>
                 : <MoviesList movies={movies}
-                              onDeleteMovie={(movie) => setMovies(movies.filter(m => m !== movie))}
+                              onDeleteMovie={handleDeleteMovie}
                 />}
             {addingMovie
                 ? <MovieForm onMovieSubmit={handleAddMovie}

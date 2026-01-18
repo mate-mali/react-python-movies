@@ -5,7 +5,7 @@ from pydantic import BaseModel
 from typing import Any
 import sqlite3
 
-
+# https://fracz.github.io/dydaktyka/issi/movies-fullstack/06_deletion/index.html
 class Movie(BaseModel):
     title: str
     year: str
@@ -47,7 +47,11 @@ def add_movie(movie: Movie):
     cursor = db.cursor()
     cursor.execute(f"INSERT INTO movies (title, year, actors) VALUES ('{movie.title}', '{movie.year}', '{movie.actors}')")
     db.commit()
-    return {"message": f"Movie with id = {cursor.lastrowid} added successfully"}
+    return {
+        "message": f"Movie with id = {cursor.lastrowid} added successfully",
+        "id": {cursor.lastrowid}
+        # return data of the exact inserted record for this specific action which is nice and accurate
+        }
     # movie = models.Movie.create(**movie.dict())
     # return movie
 
