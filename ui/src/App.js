@@ -120,7 +120,7 @@ function App() {
     return (
         <div className="container">
             <h1>My favourite movies to watch</h1>
-            <p>For additional API endpoint and documentation please check <a href="http://localhost:8000/docs" target="_blank" rel="noopener noreferrer">Swagger Documentation</a></p>
+            <p>For additional API endpoint and documentation please check <a href="/docs" target="_blank" rel="noopener noreferrer">Swagger Documentation</a></p>
             {movies.length === 0
                 ? <p>No movies yet. Maybe add something?</p>
                 : <MoviesList movies={movies}

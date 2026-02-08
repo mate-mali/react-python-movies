@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Body, Query
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, RedirectResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Any
@@ -13,7 +13,14 @@ class Movie(BaseModel):
     director: str
     description: str
 
-app = FastAPI()
+app = FastAPI(
+    title="Movies API",
+    description="A simple API for managing movies and actors",
+    version="1.0.0",
+    docs_url="/docs",
+    redoc_url="/redoc",
+    openapi_url="/openapi.json"
+)
 
 app.add_middleware(
     CORSMiddleware,
@@ -29,6 +36,10 @@ app.mount("/static", StaticFiles(directory="../ui/build/static", check_dir=False
 @app.get("/")
 def serve_react_app():
    return FileResponse("../ui/build/index.html")
+
+@app.get("/api/docs")
+def redirect_to_docs():
+    return RedirectResponse(url="/docs")
 
 @app.get('/movies')
 def get_movies():  # put application's code here
