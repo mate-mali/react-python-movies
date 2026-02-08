@@ -9,7 +9,10 @@ export default function MovieForm(props) {
     function addMovie(event) {
         event.preventDefault();
         if (title.length < 5) {
-            return alert('Tytuł jest za krótki');
+            return alert('Title is tooo short');
+        }
+        if (director.trim().length === 0) {
+            return alert('No Director provided for this movie');
         }
         props.onMovieSubmit({title, year, director, description});
         setTitle('');

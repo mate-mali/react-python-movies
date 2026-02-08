@@ -20,5 +20,5 @@ Accept: application/json
 
 ###
 
-DELETE http://127.0.0.1:8000/movies/5
+DELETE http://127.0.0.1:8000/movies/6
 Accept: application/json

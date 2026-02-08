@@ -5,7 +5,12 @@ export default function MoviesList(props) {
         <h2>Movies</h2>
         <ul className="movies-list">
             {props.movies.map(movie => <li key={movie.id} id={movie.id}>
-                <MovieListItem movie={movie} onDelete={() => props.onDeleteMovie(movie)} />
+                <MovieListItem 
+                    movie={movie} 
+                    onDelete={() => props.onDeleteMovie(movie)}
+                    onAddActor={(actorName) => props.onAddActor(movie.id, actorName)}
+                    onDeleteActor={(actorId) => props.onDeleteActor(movie.id, actorId)}
+                />
             </li>)}
         </ul>
     </div>;
